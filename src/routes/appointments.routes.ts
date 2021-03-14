@@ -3,10 +3,13 @@ import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 import AppointmentRepository from '../repositories/appointmentRepository';
 
+import ensureAuthenticate from '../middlewires/ensureAuthenticate';
+
 import CreateAppointmentRepository from '../services/CreateAppointmentService';
 
 const appointmentRoutes = Router();
 
+appointmentRoutes.use(ensureAuthenticate);
 appointmentRoutes.get('/', async (request, response) => {
   const appointmentsRepository = getCustomRepository(AppointmentRepository);
   const appointments = await appointmentsRepository.find();
@@ -15,7 +18,7 @@ appointmentRoutes.get('/', async (request, response) => {
 
 appointmentRoutes.post('/', async (request, response) => {
   try {
-    const { provider, date } = request.body;
+    const { provider_id, date } = request.body;
 
     const parsedDate = parseISO(date);
 
@@ -23,7 +26,7 @@ appointmentRoutes.post('/', async (request, response) => {
 
     const appointment = await createNewAppointment.execute({
       date: parsedDate,
-      provider,
+      provider_id,
     });
     return response.json(appointment);
   } catch (err) {
