@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import 'express-async-errors';
+
 import appointmentRoutes from './appointments.routes';
 import usersRoutes from './users.routes';
 import sessionsRoutes from './sessions.routes';
