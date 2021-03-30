@@ -14,7 +14,7 @@ sessionsRoutes.post('/', async (request, response) => {
     password,
   });
   delete user.password;
-  return response.json({ user });
+  return response.json({ user, token });
 });
 
 export default sessionsRoutes;
