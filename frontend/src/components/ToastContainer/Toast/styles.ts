@@ -65,6 +65,7 @@ export const Container = styled(animated.div)<ContainerProps>`
 
       svg {
         margin-top: 0;
+        margin-bottom: 40px;
       }
     `}
 `;
